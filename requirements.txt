@@ -1,0 +1,6 @@
+requests
+azure-functions
+azure-storage-common
+azure-storage-blob
+git+https://github.com/RimoChan/bnhhsh.git
+git+https://github.com/RimoChan/yinglish.git
