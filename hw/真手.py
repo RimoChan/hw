@@ -2,9 +2,10 @@ import re
 import requests
 
 from . import 送
+from . import 令
 
 
-def message(from_, chat, text=None, new_chat_members=None, new_chat_title=None):
+def message(from_, chat, text=None, new_chat_members=None, new_chat_title=None, entities=()):
     def 太阳交换(s, 系数=1/45):
         import bnhhsh
         d = re.findall('[a-zA-Z]+', s)
@@ -15,9 +16,29 @@ def message(from_, chat, text=None, new_chat_members=None, new_chat_title=None):
     print('chat:', chat['type'])
     print(text)
     print(new_chat_members)
-    要 = bool(chat['type'] == 'private' or (text and re.findall(r'@childponbot\b', text)))
+
+    实体表 = {}
+    if text:
+        for i in entities:
+            实体表.setdefault(i['type'], []).append(text[i['offset']:i['offset']+i['length']])
+    要 = bool(chat['type'] == 'private' or '@childponbot' in 实体表.get('mention', []))
     print('要:', 要)
     print('========\n')
+
+    for cmd in 实体表.get('bot_command', []):
+        res = re.findall('/(.*?)@(.*?)$', cmd)
+        print(res)
+        if len(res) != 1:
+            continue
+        a, b = res[0]
+        print(a,b)
+        if b!='childponbot':
+            continue
+        f = {
+            't': 令.t,
+        }.get(a, 令.default)
+        f(from_, chat)
+
     if new_chat_members:
         送.字(chat['id'], '新幼女来了！')
         送.上床(chat['id'])
@@ -31,7 +52,10 @@ def message(from_, chat, text=None, new_chat_members=None, new_chat_title=None):
             _text = text.replace('@childponbot', '')
             if t:=太阳交换(_text, 9):
                 送.纯字(chat['id'], '\n'.join([f'{k}: {v}' for k, v in t.items()]))
-        送.字(chat['id'], '好！')
+        if text and '奸' in text:
+            送.字(chat['id'], '奸！')
+        else:
+            送.字(chat['id'], '好！')
         return
     else:
         if text:
