@@ -6,7 +6,7 @@ from . import 令
 
 
 def message(from_, chat, text=None, new_chat_members=None, new_chat_title=None, entities=()):
-    def 太阳交换(s, 系数=1/45):
+    def 太阳交换(s, 系数=1/50):
         import bnhhsh
         d = re.findall('[a-zA-Z]+', s)
         dp = {x: bnhhsh.yndp(x.lower()) for x in d}
