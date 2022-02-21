@@ -25,19 +25,19 @@ def message(from_, chat, text=None, new_chat_members=None, new_chat_title=None, 
     print('要:', 要)
     print('========\n')
 
-    for cmd in 实体表.get('bot_command', []):
+    for cmd in 实体表.get('bot_command', [])[:1]:
         res = re.findall('/(.*?)@(.*?)$', cmd)
         print(res)
         if len(res) != 1:
             continue
         a, b = res[0]
-        print(a,b)
         if b!='childponbot':
             continue
+        参数 = text.split()[1:]
         f = {
             't': 令.t,
         }.get(a, 令.default)
-        f(from_, chat)
+        f(from_, chat, *参数)
 
     if new_chat_members:
         送.字(chat['id'], '新幼女来了！')
