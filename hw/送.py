@@ -1,4 +1,5 @@
 import json
+import time
 import random
 
 import requests
@@ -24,18 +25,24 @@ def 上床(chat_id):
     器.sendSticker(chat_id=chat_id, sticker='CAACAgUAAxkBAAMSYRkYC6d7rgeSouJ7OMKvnXuq5YEAAscCAAJbiYFUPPJUAsGvBMkgBA')
 
 
-def 纯字(chat_id, text):
+def 纯字(chat_id, text, reply_to_message_id=None):
     text = unvcode.simple_unvcode(text)
-    器.sendMessage(chat_id=chat_id, text=text)
+    器.sendMessage(chat_id=chat_id, text=text, reply_to_message_id=reply_to_message_id)
 
 
-def 字(chat_id, text):
+def 字(chat_id, text, reply_to_message_id=None):
     if random.random()<0.1:
         import yinglish
         text = yinglish.chs2yin(text)
-    纯字(chat_id, text)
+    纯字(chat_id, text, reply_to_message_id=reply_to_message_id)
 
 
 def 授予头衔(chat_id, user_id, custom_title):
     器.promoteChatMember(chat_id=chat_id, user_id=user_id, can_manage_chat=True)
-    器.setChatAdministratorCustomTitle(chat_id=chat_id, user_id=user_id, custom_title=custom_title)
+    for _ in range(3):
+        try:
+            器.setChatAdministratorCustomTitle(chat_id=chat_id, user_id=user_id, custom_title=custom_title)
+        except TG坏 as e:
+            time.sleep(2)
+        else:
+            break

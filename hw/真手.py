@@ -5,7 +5,7 @@ from . import 送
 from . import 令
 
 
-def message(from_, chat, text=None, new_chat_members=None, new_chat_title=None, entities=()):
+def message(from_, chat, message_id, text=None, new_chat_members=None, new_chat_title=None, entities=()):
     def 太阳交换(s, 系数=1/50):
         import bnhhsh
         d = re.findall('[a-zA-Z]+', s)
@@ -40,25 +40,25 @@ def message(from_, chat, text=None, new_chat_members=None, new_chat_title=None, 
         f(from_, chat, *参数)
 
     if new_chat_members:
-        送.字(chat['id'], '新幼女来了！')
+        送.字(chat['id'], '新幼女来了！', reply_to_message_id=message_id)
         送.上床(chat['id'])
         return
     if new_chat_title:
-        送.字(chat['id'], f'{new_chat_title}，好！')
+        送.字(chat['id'], f'{new_chat_title}，好！', reply_to_message_id=message_id)
         return
 
     if 要:
         if text:
             _text = text.replace('@childponbot', '')
             if t:=太阳交换(_text, 9):
-                送.纯字(chat['id'], '\n'.join([f'{k}: {v}' for k, v in t.items()]))
+                送.纯字(chat['id'], '\n'.join([f'{k}: {v}' for k, v in t.items()]), reply_to_message_id=message_id)
         if text and '奸' in text:
-            送.字(chat['id'], '奸！')
+            送.字(chat['id'], '奸！', reply_to_message_id=message_id)
         else:
-            送.字(chat['id'], '好！')
+            送.字(chat['id'], '好！', reply_to_message_id=message_id)
         return
     else:
         if text:
             if t:=太阳交换(text):
-                送.纯字(chat['id'], '\n'.join([f'{k}: {v}' for k, v in t.items()]))
+                送.纯字(chat['id'], '\n'.join([f'{k}: {v}' for k, v in t.items()]), reply_to_message_id=message_id)
                 return
