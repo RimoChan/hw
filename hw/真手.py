@@ -1,5 +1,5 @@
 import re
-import requests
+import datetime
 
 from . import 送
 from . import 令
@@ -37,11 +37,14 @@ def message(from_, chat, message_id, text=None, new_chat_members=None, new_chat_
         f = {
             't': 令.t,
         }.get(a, 令.default)
-        f(from_, chat, *参数)
+        f(from_, chat, message_id, *参数)
 
     if new_chat_members:
         送.字(chat['id'], '新幼女来了！', reply_to_message_id=message_id)
-        送.上床(chat['id'])
+        if 4 <= datetime.datetime.now().month <= 9:
+            送.上床(chat['id'])
+        else:
+            送.上床2(chat['id'])
         return
     if new_chat_title:
         送.字(chat['id'], f'{new_chat_title}，好！', reply_to_message_id=message_id)

@@ -21,8 +21,12 @@ class 器类:
 器 = 器类()
 
 
-def 上床(chat_id):
-    器.sendSticker(chat_id=chat_id, sticker='CAACAgUAAxkBAAMSYRkYC6d7rgeSouJ7OMKvnXuq5YEAAscCAAJbiYFUPPJUAsGvBMkgBA')
+def 上床(chat_id, reply_to_message_id=None):
+    器.sendSticker(chat_id=chat_id, sticker='CAACAgUAAxkBAAMSYRkYC6d7rgeSouJ7OMKvnXuq5YEAAscCAAJbiYFUPPJUAsGvBMkgBA', reply_to_message_id=reply_to_message_id)
+
+
+def 上床2(chat_id, reply_to_message_id=None):
+    器.sendSticker(chat_id=chat_id, sticker='CAACAgUAAxkBAAJSBWV4ZJmSAAHyvV0ZoscPto22vgzBhwACtggAAubokFRVdvM2xcnIlDME', reply_to_message_id=reply_to_message_id)
 
 
 def 纯字(chat_id, text, reply_to_message_id=None):
